@@ -20,7 +20,7 @@ public class Question {
     @Column(name = "content")
     private String content;
 
-    @OneToMany(mappedBy = "answer_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answers;
 
 }

@@ -21,8 +21,12 @@ public class Favorite {
     @Id
     @Column(name = "favorite_id")
     private UUID favoriteId;
-    @Column(name = "product_id")
-    private String productId;
     @Column(name = "add_date")
     private Date addDate;
+    @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    private Product product;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private UserTbl userAct;
 }

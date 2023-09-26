@@ -35,5 +35,5 @@ public class Transactions {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private UserAct userAct;
+    private UserTbl userAct;
 }

@@ -19,8 +19,8 @@ public class Routing {
     @Id
     @Column(name = "routing_id")
     private UUID routing_id;
-    @Enumerated(EnumType.STRING)
-    private RoutingType routingType;
+    @Column(name = "routing_type")
+    private String routingType;
     @Column(name = "date")
     private Date date;
     @Column(name = "description")
@@ -30,7 +30,8 @@ public class Routing {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private UserAct userAct;
-    @OneToMany(mappedBy = "routing_step_id", cascade = CascadeType.ALL)
-    private List<RoutingStep> routingSteps;
+    private UserTbl userAct;
+    @ManyToOne
+    @JoinColumn(name = "routing_step_id", referencedColumnName = "routing_step_id")
+    private RoutingStep routingStep;
 }

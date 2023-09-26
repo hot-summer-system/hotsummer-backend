@@ -22,8 +22,8 @@ public class ProductCategory {
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
-    List<Product> products;
+    private Product product;
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    List<Category> categories;
+    private Category category;
 }

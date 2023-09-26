@@ -22,5 +22,5 @@ public class ProductCharacteristics {
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
-    List<ProductCharacteristics> productCharacteristics;
+    private Product product;
 }

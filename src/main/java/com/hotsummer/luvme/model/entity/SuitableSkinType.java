@@ -19,12 +19,12 @@ import java.util.List;
 public class SuitableSkinType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "type_id")
-    private int typeId;
+    @Column(name = "suitable_skin_type_id")
+    private int suitableSkinTypeId;
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "product_skin_type_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "suitableSkinType", cascade = CascadeType.ALL)
     private List<ProductSkinType> productSkinTypes;
 
 }
