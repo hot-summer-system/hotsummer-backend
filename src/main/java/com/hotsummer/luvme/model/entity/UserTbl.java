@@ -8,12 +8,12 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "UserAct")
+@Table(name = "UserTbl")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserAct {
+public class UserTbl {
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +24,8 @@ public class UserAct {
     private String fullName;
     @Column(name = "gender")
     private String gender;
-    @Enumerated(EnumType.STRING)
-    private UserStatus status;
+    @Column(name = "status")
+    private String status;
     @Column(name = "birth_day")
     private Date birthDay;
     @Column(name = "bank_account")
@@ -36,14 +36,15 @@ public class UserAct {
     private Date startPremiumDate;
     @Column(name = "end_premium_date")
     private Date endPremiumDate;
-
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private Role role;
-    @OneToMany(mappedBy = "history_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userAct", cascade = CascadeType.ALL)
     private List<TestHistory> testHistories;
-    @OneToMany(mappedBy = "routing_id", cascade = CascadeType.ALL)
-    private Routing routing;
-    @OneToMany(mappedBy = "transaction_id" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userAct", cascade = CascadeType.ALL)
+    private List<Routing> routings;
+    @OneToMany(mappedBy = "userAct", cascade = CascadeType.ALL)
     private List<Transactions> transactions;
+    @OneToMany(mappedBy = "userAct", cascade = CascadeType.ALL)
+    private List<Favorite> favorites;
 }

@@ -22,6 +22,6 @@ public class Ingredient {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "product_ingredient_id")
+    @OneToMany(mappedBy = "ingredient")
     private List<ProductIngredient> productIngredients;
 }

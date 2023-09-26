@@ -29,9 +29,9 @@ public class ProductIngredient {
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
-    List<ProductCharacteristics> productCharacteristics;
+    private Product product;
     @ManyToOne
     @JoinColumn(name = "ingredient_id", referencedColumnName = "ingredient_id")
-    List<Ingredient> ingredients;
+    private Ingredient ingredient;
 
 }

@@ -22,6 +22,6 @@ public class Result {
     @Column(name = "image")
     private String image;
 
-    @OneToMany(mappedBy = "answer_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "result", cascade = CascadeType.ALL)
     private List<Answer> answers;
 }

@@ -31,5 +31,5 @@ public class TestHistory {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private UserAct userAct;
+    private UserTbl userAct;
 }

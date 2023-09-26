@@ -21,7 +21,7 @@ import java.util.List;
 public class Role {
     @Id
     @Column(name = "role_id")
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int roleId;
     @Column(name = "role_name")
     private String roleName;
@@ -31,5 +31,5 @@ public class Role {
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private List<UserAct> userActs;
+    private List<UserTbl> userActs;
 }

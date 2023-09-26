@@ -26,9 +26,6 @@ public class Answer {
     private String content;
     @Column(name = "linked_answer_id")
     private int linkedAnswerId;
-    @Column(name = "result_id")
-    private int resultId;
-
     @ManyToOne
     @JoinColumn(name = "question_id", referencedColumnName = "question_id")
     private Question question;
