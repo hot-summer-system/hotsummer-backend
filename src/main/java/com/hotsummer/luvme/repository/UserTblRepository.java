@@ -3,5 +3,8 @@ package com.hotsummer.luvme.repository;
 import com.hotsummer.luvme.model.entity.UserTbl;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserActRepository extends JpaRepository<UserTbl, Integer> {
+import java.util.Optional;
+
+public interface UserTblRepository extends JpaRepository<UserTbl, Integer> {
+    Optional<UserTbl> findByEmail(String email);
 }
