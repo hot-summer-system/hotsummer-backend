@@ -29,7 +29,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WebSecurityConfig {
     private final TokenAuthenticationFilter tokenAuthenticationFilter;
-    private final AuthenticationProvider authenticationProvider;
     private final String[] AUTH_WHITE_LIST = {
             "/swagger-ui/**", "/v3/api-docs/**", "/luvme.html",
             "/api/v1/auth/**", "/api/login/**", "/api/payment/**"

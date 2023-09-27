@@ -1,17 +1,15 @@
 package com.hotsummer.luvme.security;
 
-import com.hotsummer.luvme.model.entity.Role;
-import com.hotsummer.luvme.model.entity.UserTbl;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import java.util.Collection;
+
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
+import com.hotsummer.luvme.model.entity.UserTbl;
+import com.hotsummer.luvme.model.enums.UserStatus;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @Data
 @AllArgsConstructor
@@ -41,7 +39,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !userTbl.getStatus().equals(UserStatus.INACTIVE.toString());
     }
 
     @Override
