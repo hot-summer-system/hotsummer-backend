@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
 
 @SpringBootApplication
 @SecurityScheme(name = "token_auth", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER, scheme = "bearer", bearerFormat = "JWT")
-@OpenAPIDefinition(info = @Info(title = "API Doc for Krowd Investment FunFund Web Service", description = "This is list of endpoints and documentations of REST API for FunFund Web Service", version = "1.0"), servers = {
+@OpenAPIDefinition(info = @Info(title = "API Doc for LuvMe Web Service", description = "This is list of endpoints and documentations of REST API for LuvMe Web Service", version = "1.0"), servers = {
 		@Server(url = "http://localhost:8080", description = "Local development server domain") }, security = {
 				@SecurityRequirement(name = "token_auth") })
 public class LuvmeApplication {
@@ -34,7 +34,7 @@ public class LuvmeApplication {
 	public void initFirebase() throws IOException {
 		FirebaseOptions options = FirebaseOptions.builder()
 				.setCredentials(GoogleCredentials
-						.fromStream(this.getClass().getClassLoader().getResourceAsStream("serviceAccountKey.json")))
+						.fromStream(this.getClass().getClassLoader().goutetResourceAsStream("serviceAccountKey.json")))
 				.build();
 		if (FirebaseApp.getApps().isEmpty()) {
 			FirebaseApp.initializeApp(options);
