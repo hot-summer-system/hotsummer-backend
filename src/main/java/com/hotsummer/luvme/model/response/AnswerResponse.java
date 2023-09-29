@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AnswerResponse {
-    private int answerId;
-    private int resultId;
+    private Integer answerId;
+    private Integer resultId;
     private String content;
-
+    private Integer linkedQuestionId;
 }

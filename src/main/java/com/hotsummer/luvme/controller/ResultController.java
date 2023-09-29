@@ -1,17 +1,18 @@
 package com.hotsummer.luvme.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.hotsummer.luvme.controller.api.exception.CustomBadRequestException;
 import com.hotsummer.luvme.controller.api.exception.CustomNotFoundException;
-import com.hotsummer.luvme.model.response.QuestionResponse;
 import com.hotsummer.luvme.model.response.ResultResponse;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RequestMapping("api/v1/result")
 public interface ResultController {
@@ -25,6 +26,7 @@ public interface ResultController {
     })
     @GetMapping("/results/{resultId}")
     @PreAuthorize("hasAuthority('CUSTOMER')")
-    public ResultResponse getResultById(@RequestParam("resultId") Integer resultId) throws CustomNotFoundException, CustomBadRequestException;
+    public ResultResponse getResultById(@PathVariable("resultId") Integer resultId)
+            throws CustomNotFoundException, CustomBadRequestException;
 
 }

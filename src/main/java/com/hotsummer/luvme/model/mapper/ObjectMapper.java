@@ -12,14 +12,15 @@ import java.util.List;
 
 public class ObjectMapper {
 
-    public static QuestionResponse fromQuestionToQuestionResponseFullFill(Question question){
+    public static QuestionResponse fromQuestionToQuestionResponseFullFill(Question question) {
         List<AnswerResponse> answerResponseList = new ArrayList<>();
-        if(question != null){
-            if(question.getAnswers() != null){
+        if (question != null) {
+            if (question.getAnswers() != null) {
                 for (Answer answer : question.getAnswers()) {
                     AnswerResponse.AnswerResponseBuilder builder = AnswerResponse.builder()
                             .answerId(answer.getAnswerId())
-                            .content(answer.getContent());
+                            .content(answer.getContent())
+                            .linkedQuestionId(answer.getLinkedQuestionId());
                     if (answer.getResult() != null) {
                         builder.resultId(answer.getResult().getResultId());
                     }
@@ -28,24 +29,24 @@ public class ObjectMapper {
             }
         }
         return QuestionResponse.builder()
-                        .questionId(question.getQuestionId())
-                        .content(question.getContent())
-                        .answers(answerResponseList)
-                        .build();
+                .questionId(question.getQuestionId())
+                .content(question.getContent())
+                .answers(answerResponseList)
+                .build();
     }
 
-    public static ResultResponse fromResultToResultResponse(Result result){
-        return result == null ? null :
-                ResultResponse.builder()
+    public static ResultResponse fromResultToResultResponse(Result result) {
+        return result == null ? null
+                : ResultResponse.builder()
                         .resultId(result.getResultId())
                         .content(result.getContent())
                         .image(result.getImage() == null ? "" : result.getImage())
                         .build();
     }
 
-    public static AnswerResponse fromAnswerToAnswerResponse(Answer answer){
-        return answer == null ? null :
-                AnswerResponse.builder()
+    public static AnswerResponse fromAnswerToAnswerResponse(Answer answer) {
+        return answer == null ? null
+                : AnswerResponse.builder()
                         .answerId(answer.getAnswerId())
                         .content(answer.getContent())
                         .build();
