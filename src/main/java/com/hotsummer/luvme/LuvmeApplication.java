@@ -34,7 +34,7 @@ public class LuvmeApplication {
 	public void initFirebase() throws IOException {
 		FirebaseOptions options = FirebaseOptions.builder()
 				.setCredentials(GoogleCredentials
-						.fromStream(this.getClass().getClassLoader().goutetResourceAsStream("serviceAccountKey.json")))
+						.fromStream(this.getClass().getClassLoader().getResourceAsStream("serviceAccountKey.json")))
 				.build();
 		if (FirebaseApp.getApps().isEmpty()) {
 			FirebaseApp.initializeApp(options);
