@@ -1,13 +1,6 @@
 package com.hotsummer.luvme.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -21,15 +14,15 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "answer_id")
-    private int answerId;
-    @Column(name = "content")
+    private Integer answerId;
+    @Column(name = "content", columnDefinition = "nvarchar(255)")
     private String content;
-    @Column(name = "linked_answer_id")
-    private int linkedAnswerId;
-    @ManyToOne
+    @Column(name = "linked_question_id")
+    private Integer linkedQuestionId;
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id", referencedColumnName = "question_id")
     private Question question;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "result_id", referencedColumnName = "result_id")
     private Result result;
 }
