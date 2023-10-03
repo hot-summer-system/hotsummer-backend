@@ -26,7 +26,7 @@ public interface QuestionController {
         @PreAuthorize("hasAuthority('CUSTOMER')")
         public ResponseEntity<QuestionResponse> getQuestionById(@PathVariable("questionId") Integer questionId)
                         throws CustomNotFoundException;
-
+       //request param
         @Operation(summary = "Get First Question", description = "Get Question that not have in linked question id in any field of table answer")
         @ApiResponses(value = {
                         @ApiResponse(responseCode = "200", description = "Get Question Success"),

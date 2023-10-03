@@ -34,9 +34,9 @@ public class UserTbl {
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
-    @Column(name = "email")
+    @Column(name = "email", columnDefinition = "nvarchar(255)")
     private String email;
-    @Column(name = "full_name")
+    @Column(name = "full_name", columnDefinition = "nvarchar(255)")
     private String fullName;
     @Column(name = "gender")
     private String gender;

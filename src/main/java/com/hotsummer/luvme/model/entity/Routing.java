@@ -26,11 +26,11 @@ public class Routing {
     @Id
     @Column(name = "routing_id")
     private UUID routing_id;
-    @Column(name = "routing_type")
+    @Column(name = "routing_type", columnDefinition = "nvarchar(255)")
     private String routingType;
     @Column(name = "date")
     private Date date;
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "nvarchar(max)")
     private String description;
     @Column(name = "is_done")
     private Boolean isDone;

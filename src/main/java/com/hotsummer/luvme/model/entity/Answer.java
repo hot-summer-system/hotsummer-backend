@@ -15,7 +15,7 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "answer_id")
     private Integer answerId;
-    @Column(name = "content", columnDefinition = "nvarchar(255)")
+    @Column(name = "content", columnDefinition = "nvarchar(max)")
     private String content;
     @Column(name = "linked_question_id")
     private Integer linkedQuestionId;

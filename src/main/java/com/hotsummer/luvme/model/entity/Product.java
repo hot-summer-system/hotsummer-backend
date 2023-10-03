@@ -26,11 +26,11 @@ public class Product {
     @Id
     @Column(name = "product_id")
     private UUID productId;
-    @Column(name = "product_name")
+    @Column(name = "product_name", columnDefinition = "nvarchar(255)")
     private String productName;
-    @Column(name = "product_image")
+    @Column(name = "product_image", columnDefinition = "nvarchar(max)")
     private String productImage;
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "nvarchar(max)")
     private String description;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)

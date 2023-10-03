@@ -5,12 +5,14 @@ import com.hotsummer.luvme.controller.api.exception.CustomBadRequestException;
 import com.hotsummer.luvme.controller.api.exception.CustomNotFoundException;
 import com.hotsummer.luvme.model.response.QuestionResponse;
 import com.hotsummer.luvme.service.impl.QuestionServiceImpl;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Question API")
 public class QuestionControllerImpl implements QuestionController {
     private final QuestionServiceImpl questionService;
 

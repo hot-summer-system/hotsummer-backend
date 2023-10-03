@@ -23,9 +23,9 @@ public class Role {
     @Column(name = "role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int roleId;
-    @Column(name = "role_name")
+    @Column(name = "role_name", columnDefinition = "nvarchar(255)")
     private String roleName;
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "nvarchar(255)")
     private String description;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)

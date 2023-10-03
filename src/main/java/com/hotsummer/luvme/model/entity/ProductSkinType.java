@@ -17,7 +17,7 @@ public class ProductSkinType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_skin_type_id")
     private int productSkinTypeId;
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "nvarchar(max)")
     private String description;
 
     @ManyToOne

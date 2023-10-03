@@ -1,7 +1,16 @@
 package com.hotsummer.luvme.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
+import com.hotsummer.luvme.controller.api.exception.CustomBadRequestException;
+import com.hotsummer.luvme.controller.api.exception.CustomForbiddenException;
+import com.hotsummer.luvme.model.enums.Gender;
+import com.hotsummer.luvme.model.error.CustomError;
+import com.hotsummer.luvme.model.request.UserRequest;
+import com.hotsummer.luvme.service.Authentication.AuthenticationService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +38,53 @@ public class UserServiceImpl implements UserService {
             return isExistUser.get();
         }
         return createNewUser(email);
+    }
+
+    @Override
+    public UserTbl updateUserWithNonFullFill(int userId, UserRequest userRequest) throws CustomBadRequestException, CustomForbiddenException {
+        UserTbl userTbl = AuthenticationService.getCurrentUserFromSecurityContext();
+
+        if(userId != userTbl.getUserId()){
+            throw new CustomForbiddenException(
+                    CustomError.builder().
+                            errorCode("403").message("User Un Recognize").field("User").build()
+            );
+        }
+        if(!userTbl.getStatus().equals(UserStatus.NONFULLFILL.toString())){
+            throw new CustomForbiddenException(
+                    CustomError.builder().
+                            errorCode("401").message("User Not Allow To Do This Function").field("User").build());
+        }
+        userTbl.setFullName(userRequest.getFullName());
+
+        boolean isValidGender = false;
+        for (Gender gender : Gender.values()) {
+            if (gender.toString().equals(userRequest.getGender().toUpperCase())) {
+                isValidGender = true;
+                break;
+            }
+        }
+
+        if(!isValidGender){
+            throw new CustomBadRequestException(
+                    CustomError.builder().errorCode("400").message("Incorrect input").field("Gender").build());
+        }
+        userTbl.setGender(userRequest.getGender());
+        userTbl.setStatus(UserStatus.ACTIVE.toString());
+
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("YYY-MM-DD");
+        Date parsedBirthDay;
+        try {
+            parsedBirthDay = dateFormat.parse( userRequest.getBirthDay());
+        } catch (ParseException e) {
+            throw new CustomBadRequestException(
+                    CustomError.builder().errorCode("400").message("Invalid date format").field("BirthDay").build());
+        }
+
+        userTbl.setBirthDay(parsedBirthDay);
+
+        return userTblRepository.save(userTbl);
     }
 
     public UserTbl createNewUser(String email) {

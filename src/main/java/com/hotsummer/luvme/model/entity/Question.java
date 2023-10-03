@@ -17,7 +17,7 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "question_id")
     private Integer questionId;
-    @Column(name = "content", columnDefinition = "nvarchar(255)")
+    @Column(name = "content", columnDefinition = "nvarchar(max)")
     private String content;
 
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
