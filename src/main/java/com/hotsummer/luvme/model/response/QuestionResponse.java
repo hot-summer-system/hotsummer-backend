@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class QuestionResponse {
-     private int questionId;
+     private Integer questionId;
      private String content;
      List<AnswerResponse> answers;
 }

@@ -7,6 +7,7 @@ import com.hotsummer.luvme.model.mapper.ObjectMapper;
 import com.hotsummer.luvme.model.response.ResultResponse;
 import com.hotsummer.luvme.repository.QuestionRepository;
 import com.hotsummer.luvme.repository.ResultRepository;
+import com.hotsummer.luvme.repository.UserTblRepository;
 import com.hotsummer.luvme.service.ResultService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

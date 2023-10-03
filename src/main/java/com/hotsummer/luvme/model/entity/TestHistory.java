@@ -26,7 +26,7 @@ public class TestHistory {
     private int testHistoryId;
     @Column(name = "date")
     private Date date;
-    @Column(name = "skin_type")
+    @Column(name = "skin_type", columnDefinition = "nvarchar(255)")
     private String skinType;
 
     @ManyToOne

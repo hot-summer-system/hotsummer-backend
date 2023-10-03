@@ -16,11 +16,11 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "question_id")
-    private int questionId;
-    @Column(name = "content")
+    private Integer questionId;
+    @Column(name = "content", columnDefinition = "nvarchar(max)")
     private String content;
 
-    @OneToMany(mappedBy = "question",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Answer> answers;
 
 }

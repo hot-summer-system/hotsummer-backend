@@ -16,10 +16,10 @@ public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "result_id")
-    private int resultId;
-    @Column(name = "content")
+    private Integer resultId;
+    @Column(name = "content", columnDefinition = "nvarchar(255)")
     private String content;
-    @Column(name = "image")
+    @Column(name = "image", columnDefinition = "nvarchar(max)")
     private String image;
 
     @OneToMany(mappedBy = "result", cascade = CascadeType.ALL)

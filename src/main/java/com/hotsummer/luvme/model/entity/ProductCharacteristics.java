@@ -3,8 +3,6 @@ package com.hotsummer.luvme.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "ProductCharacteristics")
 @Getter
@@ -15,12 +13,13 @@ import java.util.List;
 public class ProductCharacteristics {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "characteristics_id")
-    private int characteristicsId;
-    @Column(name = "description")
-    private String description;
+    @Column(name = "product_characteristics_id")
+    private int productCharacteristicsId;
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
+    @ManyToOne
+    @JoinColumn(name = "characteristics_id", referencedColumnName = "characteristics_id")
+    private Characteristic characteristic;
 }
