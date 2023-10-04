@@ -1,0 +1,5 @@
+DB_URL: jdbc:postgresql://dpg-cke2g2ciibqc73djereg-a.singapore-postgres.render.com:5432/db_luv_me_database
+DEV_DB_USERNAME: db_luv_me_user
+DEV_DB_PASSWORD: gVxadWJtLXkf225ICsO6OZq3xh3Kzlk3
+Driver-Class-Name: org.postgresql.Driver
+Dialect: org.hibernate.dialect.PostgreSQLDialect

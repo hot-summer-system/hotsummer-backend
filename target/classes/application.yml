@@ -4,16 +4,15 @@ spring:
     active: default
     include: dev
 ---
-spring:
-  jackson: date-format=yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+
 ---
 spring:
   config:
-    import: env.yml
+    import: env-cloud.yml
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.SQLServerDialect
+        dialect: ${Dialect}
         #        show_sql: true
         format_sql: true
     hibernate:

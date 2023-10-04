@@ -17,9 +17,9 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ingredient_id")
     private int ingredientId;
-    @Column(name = "name", columnDefinition = "nvarchar(255)")
+    @Column(name = "name")
     private String name;
-    @Column(name = "description", columnDefinition = "nvarchar(max)")
+    @Column(name = "description")
     private String description;
 
     @OneToMany(mappedBy = "ingredient")

@@ -22,11 +22,11 @@ public class Transactions {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "transaction_id")
     private int transactionId;
-    @Column(name = "to_bank", columnDefinition = "nvarchar(255)")
+    @Column(name = "to_bank")
     private String toBank;
-    @Column(name = "transaction_type", columnDefinition = "nvarchar(255)")
+    @Column(name = "transaction_type")
     private String transactionType;
-    @Column(name = "description", columnDefinition = "nvarchar(max)")
+    @Column(name = "description")
     private String description;
     @Column(name = "create_at")
     private Date createdAt;

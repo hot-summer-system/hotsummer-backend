@@ -24,7 +24,7 @@ public class ProductIngredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_ingredient_id")
     private int productIngredientId;
-    @Column(name = "description", columnDefinition = "nvarchar(max)")
+    @Column(name = "description")
     private String description;
 
     @ManyToOne

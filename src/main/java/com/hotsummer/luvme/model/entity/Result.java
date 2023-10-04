@@ -17,9 +17,9 @@ public class Result {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "result_id")
     private Integer resultId;
-    @Column(name = "content", columnDefinition = "nvarchar(255)")
+    @Column(name = "content")
     private String content;
-    @Column(name = "image", columnDefinition = "nvarchar(max)")
+    @Column(name = "image")
     private String image;
 
     @OneToMany(mappedBy = "result", cascade = CascadeType.ALL)
