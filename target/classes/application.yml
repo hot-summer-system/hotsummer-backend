@@ -45,4 +45,4 @@ momo:
   lang: en
 
 server:
-  port: 8080
+  port: ${Port}

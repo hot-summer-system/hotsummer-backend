@@ -3,3 +3,5 @@ DEV_DB_USERNAME: db_luv_me_user
 DEV_DB_PASSWORD: gVxadWJtLXkf225ICsO6OZq3xh3Kzlk3
 Driver-Class-Name: org.postgresql.Driver
 Dialect: org.hibernate.dialect.PostgreSQLDialect
+API-DOC-URL-FOR-LOCAL: https://hot-summer-service.onrender.com/luvme.html
+Port: hot-summer-service.onrender.com
