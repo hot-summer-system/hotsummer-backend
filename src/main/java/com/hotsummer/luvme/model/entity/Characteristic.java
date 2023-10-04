@@ -17,7 +17,7 @@ public class Characteristic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "characteristics_id")
     private int characteristicsId;
-    @Column(name = "description", columnDefinition = "nvarchar(max)")
+    @Column(name = "description")
     private String description;
 
     @OneToMany(mappedBy = "characteristic", cascade = CascadeType.ALL)

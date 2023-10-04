@@ -21,9 +21,9 @@ public class SuitableSkinType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "suitable_skin_type_id")
     private int suitableSkinTypeId;
-    @Column(name = "description", columnDefinition = "nvarchar(max)")
+    @Column(name = "description")
     private String description;
-    @Column(name = "type", columnDefinition = "nvarchar(50)")
+    @Column(name = "type")
     private String type;
 
     @OneToMany(mappedBy = "suitableSkinType", cascade = CascadeType.ALL)

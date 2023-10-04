@@ -17,7 +17,7 @@ public class ProductCharacteristics {
     private int productCharacteristicsId;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    @JoinColumn(name = "product_id")
     private Product product;
     @ManyToOne
     @JoinColumn(name = "characteristics_id", referencedColumnName = "characteristics_id")

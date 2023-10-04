@@ -17,11 +17,11 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private int categoryId;
-    @Column(name = "category_name", columnDefinition = "nvarchar(255)")
+    @Column(name = "category_name")
     private String categoryName;
-    @Column(name = "description", columnDefinition = "nvarchar(max)")
+    @Column(name = "description")
     private String description;
-    @Column(name = "image", columnDefinition = "nvarchar(max)")
+    @Column(name = "image")
     private String image;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
