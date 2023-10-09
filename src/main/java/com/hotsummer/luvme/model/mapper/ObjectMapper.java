@@ -31,7 +31,7 @@ public class ObjectMapper {
                         new CategoryResponse(
                                 category.getCategory().getCategoryId(),
                                 category.getCategory().getCategoryName(),
-                                category.getCategory().getDescription(),
+                                category.getCategory().getCategoryCode(),
                                 category.getCategory().getImage()
                         )
                 ))

@@ -8,7 +8,7 @@ spring:
 ---
 spring:
   config:
-    import: env-cloud.yml
+    import: env.yml
   jpa:
     properties:
       hibernate:
