@@ -11,5 +11,5 @@ public interface ProductService {
     List<ProductResponse> getProductWithSuitableSkinType()
             throws CustomNotFoundException, CustomInternalServerException;
 
-    List<ProductResponse> getProductWithCategory(String categoryCode) throws CustomNotFoundException, CustomInternalServerException;
+    List<ProductResponse> getProductWithCategory(String categoryCode) throws CustomNotFoundException, CustomInternalServerException
 }
