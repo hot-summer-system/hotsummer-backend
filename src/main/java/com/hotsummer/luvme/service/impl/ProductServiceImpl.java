@@ -1,5 +1,6 @@
 package com.hotsummer.luvme.service.impl;
 
+import com.hotsummer.luvme.controller.api.exception.CustomBadRequestException;
 import com.hotsummer.luvme.controller.api.exception.CustomInternalServerException;
 import com.hotsummer.luvme.controller.api.exception.CustomNotFoundException;
 import com.hotsummer.luvme.model.entity.Product;
@@ -45,5 +46,22 @@ public class ProductServiceImpl implements ProductService {
           }
 
           return productResponses;
+    }
+
+    @Override
+    public List<ProductResponse> getProductWithCategory(String categoryCode) throws CustomNotFoundException, CustomInternalServerException {
+        List<Product> products = productRepository.findProductsCategoryCode(categoryCode)
+                .orElseThrow(() -> new CustomNotFoundException(
+                        CustomError.builder().errorCode("400").message("No Product Found").field("Skin With Category").build()));
+        List<ProductResponse> productResponses = new ArrayList<>();
+        try{
+            for (Product product : products){
+                productResponses.add(ObjectMapper.fromProductToProductResponse(product));
+            }
+        }catch (Exception e){
+            throw new CustomInternalServerException(
+                    CustomError.builder().errorCode("500").errorCode(e.getMessage()).field("Skin With Category").build());
+        }
+        return productResponses;
     }
 }
