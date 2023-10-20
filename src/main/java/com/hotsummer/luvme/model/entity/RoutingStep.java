@@ -1,13 +1,6 @@
 package com.hotsummer.luvme.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -25,7 +18,7 @@ public class RoutingStep {
     @Column(name = "product_id")
     private String productId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "routing_id", referencedColumnName = "routing_id")
     private Routing routing;
 }

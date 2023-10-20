@@ -25,21 +25,20 @@ public class RoutingServiceImpl implements RoutingService {
     private final RoutingRepository routingRepository;
 
     @Override
-    public Boolean CreateRouting(String description, String dateReminder, List<RoutingStep> routingSteps) throws CustomInternalServerException {
+    public Routing CreateRouting(String description, String dateReminder) throws CustomInternalServerException {
         Routing routing = Routing.builder()
                 .routing_id(UUID.randomUUID())
                 .routingType(dateReminder.contains("AM") ? "MORNING" : "NIGHT")
                 .date(TimeConverter.getCurrentDate())
                 .description(description)
                 .dateReminder(TimeConverter.getCronExpression(dateReminder))
-                .routingSteps(routingSteps)
                 .userAct(AuthenticationService.getCurrentUserFromSecurityContext())
                 .isDone(false)
                 .build();
         if(routingRepository.save(routing) == null){
             throw new CustomInternalServerException(CustomError.builder().errorCode("500").message("Create Failed").field("Create Routing").build());
         }
-        return true;
+        return routing;
     }
 
     @Override

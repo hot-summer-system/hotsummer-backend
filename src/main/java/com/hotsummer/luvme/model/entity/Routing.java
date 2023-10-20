@@ -32,8 +32,6 @@ public class Routing {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private UserTbl userAct;
-    @OneToMany(mappedBy = "routing", cascade = CascadeType.ALL)
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
+    @OneToMany(mappedBy = "routing", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<RoutingStep> routingSteps;
 }

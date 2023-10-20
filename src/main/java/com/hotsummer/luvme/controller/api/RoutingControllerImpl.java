@@ -4,6 +4,7 @@ import com.hotsummer.luvme.controller.RoutingController;
 import com.hotsummer.luvme.controller.api.exception.CustomBadRequestException;
 import com.hotsummer.luvme.controller.api.exception.CustomInternalServerException;
 import com.hotsummer.luvme.controller.api.exception.CustomNotFoundException;
+import com.hotsummer.luvme.model.entity.Routing;
 import com.hotsummer.luvme.model.entity.RoutingStep;
 import com.hotsummer.luvme.model.error.CustomError;
 import com.hotsummer.luvme.model.request.RoutingRequest;
@@ -79,9 +80,9 @@ public class RoutingControllerImpl implements RoutingController {
         if(request == null){
             throw new CustomBadRequestException(CustomError.builder().errorCode("400").message("Request is null").build());
         }
-        List<RoutingStep> routingStepList = routingStepService.CreateRoutingStep(request.getProductIdList());
-        if(routingStepList != null){
-            if (routingService.CreateRouting(request.getDescription(), request.getDateReminder(), routingStepList)){
+        Routing routing = routingService.CreateRouting(request.getDescription(), request.getDateReminder());
+        if(routing != null){
+            if ( routingStepService.CreateRoutingStep(request.getProductIdList(), routing)){
                 return ResponseEntity.ok("Success");
             }
         }

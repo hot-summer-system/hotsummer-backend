@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface RoutingStepService {
-    List<RoutingStep> CreateRoutingStep(List<UUID> productId) throws CustomInternalServerException;
+    Boolean CreateRoutingStep(List<UUID> productId, Routing routing) throws CustomInternalServerException;
 
 }
