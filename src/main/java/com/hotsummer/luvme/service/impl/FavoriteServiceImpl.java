@@ -16,6 +16,7 @@ import com.hotsummer.luvme.model.entity.UserTbl;
 import com.hotsummer.luvme.model.error.CustomError;
 import com.hotsummer.luvme.model.mapper.ObjectMapper;
 import com.hotsummer.luvme.model.request.FavoriteRequest;
+import com.hotsummer.luvme.model.response.FavoriteFullFieldRes;
 import com.hotsummer.luvme.model.response.FavoriteResponse;
 import com.hotsummer.luvme.model.response.ProductResponse;
 import com.hotsummer.luvme.repository.FavoriteRepository;
@@ -64,14 +65,15 @@ public class FavoriteServiceImpl implements FavoriteService {
     }
 
     @Override
-    public List<ProductResponse> getAllFavoriteProductOfCurrentUser() {
+    public List<FavoriteFullFieldRes> getAllFavoriteProductOfCurrentUser() {
         UserTbl user = AuthenticationService.getCurrentUserFromSecurityContext();
         List<Favorite> favorites = favoriteRepository.findAll().stream()
                 .filter(f -> user.getUserId() == f.getUserAct().getUserId()).toList();
-        List<ProductResponse> responses = new ArrayList<>();
+        List<FavoriteFullFieldRes> responses = new ArrayList<>();
         for (Favorite favorite : favorites) {
             Product product = favorite.getProduct();
-            responses.add(ObjectMapper.fromProductToProductResponse(product));
+            responses.add(new FavoriteFullFieldRes(favorite.getFavoriteId(),
+                    ObjectMapper.fromProductToProductResponse(product)));
         }
         return responses;
     }
