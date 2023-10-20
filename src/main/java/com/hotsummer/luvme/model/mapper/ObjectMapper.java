@@ -34,7 +34,6 @@ public class ObjectMapper {
         if(product == null){
             return null;
         }
-
                 List<ProductSkinTypeResponse> productSkinTypeResponseList = product.getProductSkinTypes().stream()
                                 .map(skinType -> new ProductSkinTypeResponse(
                                                 skinType.getProductSkinTypeId(),

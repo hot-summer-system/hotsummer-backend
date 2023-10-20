@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,15 +25,6 @@ public class ProductControllerImpl implements ProductController {
     public ResponseEntity<List<ProductResponse>> getProductWithSuitableSkinType()
             throws CustomNotFoundException, CustomInternalServerException {
         List<ProductResponse> response = productService.getProductWithSuitableSkinType();
-        return ResponseEntity.ok(response);
-    }
-
-    @Override
-    public ResponseEntity<ProductResponse> getProductById(String productId) throws CustomBadRequestException, CustomNotFoundException, CustomInternalServerException {
-        if(productId == null){
-            throw new CustomBadRequestException(CustomError.builder().message("Product id is null").errorCode("400").build());
-        }
-        ProductResponse response = productService.getProductWithProductId(productId);
         return ResponseEntity.ok(response);
     }
 

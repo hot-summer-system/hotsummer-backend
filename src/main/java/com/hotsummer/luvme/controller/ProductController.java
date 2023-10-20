@@ -31,16 +31,6 @@ public interface ProductController {
         public ResponseEntity<List<ProductResponse>> getProductWithSuitableSkinType()
                         throws CustomNotFoundException, CustomInternalServerException;
 
-    @Operation(summary = "Get Product By Id", description = "Get Product With Product Id")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Product Fetching Success"),
-            @ApiResponse(responseCode = "404", description = "No Product Found"),
-            @ApiResponse(responseCode = "500", description = "Exception Error"),
-    })
-    @GetMapping("/{productId}")
-    @PreAuthorize("hasAuthority('CUSTOMER')")
-    public ResponseEntity<ProductResponse> getProductById(@PathVariable("productId") String productId)
-            throws CustomBadRequestException,CustomNotFoundException, CustomInternalServerException;
     @Operation(summary = "Get Product By Category", description = "Get Product List With Category Code")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Product Fetching Success"),
@@ -52,19 +42,8 @@ public interface ProductController {
     public ResponseEntity<List<ProductResponse>> getProductWithCategory(@RequestParam String categoryCode)
             throws CustomNotFoundException, CustomInternalServerException, CustomBadRequestException;
 
-        @Operation(summary = "Get Product By Category", description = "Get Product List With Category Code")
-        @ApiResponses(value = {
-                        @ApiResponse(responseCode = "200", description = "Product Fetching Success"),
-                        @ApiResponse(responseCode = "404", description = "No Product Suitable"),
-                        @ApiResponse(responseCode = "500", description = "Exception Error"),
-        })
-        @GetMapping("/category/")
-        @PreAuthorize("hasAuthority('CUSTOMER')")
-        public ResponseEntity<List<ProductResponse>> getProductWithCategory(@RequestParam String categoryCode)
-                        throws CustomNotFoundException, CustomInternalServerException, CustomBadRequestException;
-
-        @GetMapping("/{id}")
-        @Operation(summary = "Get Product By Id", description = "Get Product By Id")
-        public ResponseEntity<ProductResponse> getProductById(@PathVariable UUID id)
+    @GetMapping("/{id}")
+    @Operation(summary = "Get Product By Id", description = "Get Product By Id")
+    public ResponseEntity<ProductResponse> getProductById(@PathVariable UUID id)
                         throws CustomNotFoundException;
 }
