@@ -30,8 +30,10 @@ public class Product {
     private String productName;
     @Column(name = "product_image")
     private String productImage;
-    @Column(name = "description")
+    @Column(name = "description",  columnDefinition = "nvarchar(max)")
     private String description;
+    @Column(name = "how_to_use_product")
+    private String howToUse;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductSkinType> productSkinTypes;
