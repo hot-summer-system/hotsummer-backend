@@ -4,7 +4,13 @@ spring:
     active: default
     include: dev
 ---
-
+spring:
+  scheduled:
+    cron-expression: "0 00 00 * * ?"
+---
+spring:
+  scheduled:
+    env-key: "0702f048-d7ad-4882-9076-784b7bbd3523"
 ---
 spring:
   config:
