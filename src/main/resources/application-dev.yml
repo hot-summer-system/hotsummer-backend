@@ -1,6 +1,6 @@
 spring:
   config:
-    import: env.yml
+    import:  env-cloud.yml
   datasource:
     driver-class-name: ${Driver-Class-Name}
     url: ${DB_URL}
