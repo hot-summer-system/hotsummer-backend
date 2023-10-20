@@ -24,7 +24,7 @@ public interface ResultController {
             @ApiResponse(responseCode = "400", description = "Result Save Failed"),
             @ApiResponse(responseCode = "500", description = "Server Error"),
     })
-    @GetMapping("/results/{resultId}")
+    @GetMapping("/{resultId}")
     @PreAuthorize("hasAuthority('CUSTOMER')")
     public ResultResponse getResultById(@PathVariable("resultId") Integer resultId)
             throws CustomNotFoundException, CustomBadRequestException;

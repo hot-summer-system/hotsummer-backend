@@ -1,10 +1,8 @@
 package com.hotsummer.luvme.service.impl;
 
-import com.hotsummer.luvme.controller.api.exception.CustomBadRequestException;
 import com.hotsummer.luvme.controller.api.exception.CustomInternalServerException;
 import com.hotsummer.luvme.controller.api.exception.CustomNotFoundException;
 import com.hotsummer.luvme.model.entity.Product;
-import com.hotsummer.luvme.model.entity.TestHistory;
 import com.hotsummer.luvme.model.error.CustomError;
 import com.hotsummer.luvme.model.mapper.ObjectMapper;
 import com.hotsummer.luvme.model.mapper.SkinTypeConverter;
@@ -18,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -63,5 +62,18 @@ public class ProductServiceImpl implements ProductService {
                     CustomError.builder().errorCode("500").errorCode(e.getMessage()).field("Skin With Category").build());
         }
         return productResponses;
+    }
+
+    @Override
+    public ProductResponse getProductWithProductId(String productId) throws CustomNotFoundException, CustomInternalServerException {
+        try {
+            Product product = productRepository.findProductByProductId(UUID.fromString(productId))
+                    .orElseThrow(() -> new CustomNotFoundException(CustomError
+                    .builder().message("No product found").errorCode("404").build()));
+            return ObjectMapper.fromProductToProductResponse(product);
+        }catch (Exception e){
+            throw new CustomInternalServerException(
+                    CustomError.builder().errorCode("500").errorCode(e.getMessage()).field("Get product by id").build());
+        }
     }
 }

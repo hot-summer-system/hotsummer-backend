@@ -12,4 +12,5 @@ public interface ProductService {
             throws CustomNotFoundException, CustomInternalServerException;
 
     List<ProductResponse> getProductWithCategory(String categoryCode) throws CustomNotFoundException, CustomInternalServerException;
+    ProductResponse getProductWithProductId(String productId) throws CustomNotFoundException, CustomInternalServerException;
 }

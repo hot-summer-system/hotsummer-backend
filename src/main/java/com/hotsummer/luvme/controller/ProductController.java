@@ -30,6 +30,16 @@ public interface ProductController {
     public ResponseEntity<List<ProductResponse>> getProductWithSuitableSkinType()
             throws CustomNotFoundException, CustomInternalServerException;
 
+    @Operation(summary = "Get Product By Id", description = "Get Product With Product Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Product Fetching Success"),
+            @ApiResponse(responseCode = "404", description = "No Product Found"),
+            @ApiResponse(responseCode = "500", description = "Exception Error"),
+    })
+    @GetMapping("/{productId}")
+    @PreAuthorize("hasAuthority('CUSTOMER')")
+    public ResponseEntity<ProductResponse> getProductById(@PathVariable("productId") String productId)
+            throws CustomBadRequestException,CustomNotFoundException, CustomInternalServerException;
     @Operation(summary = "Get Product By Category", description = "Get Product List With Category Code")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Product Fetching Success"),

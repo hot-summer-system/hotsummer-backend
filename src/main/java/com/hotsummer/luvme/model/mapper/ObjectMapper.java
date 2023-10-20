@@ -8,6 +8,28 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ObjectMapper {
+
+    public static RoutingResponse fromRoutingToRoutingResponse(Routing routing){
+        if (routing == null){
+            return null;
+        }
+
+        List<RoutingStepResponse> routingStepResponseList = routing.getRoutingSteps().stream()
+                .map(routingStep -> new RoutingStepResponse(
+                        routingStep.getRoutingStepId(),
+                        routingStep.getProductId()
+                )).collect(Collectors.toList());
+
+        RoutingResponse.RoutingResponseBuilder builder = RoutingResponse.builder()
+                .routingType(routing.getRoutingType())
+                .date(routing.getDate())
+                .description(routing.getDescription())
+                .dateReminder(routing.getDateReminder())
+                .isDone(routing.getIsDone())
+                .routingStepResponseList(routingStepResponseList);
+
+        return builder.build();
+    }
     public static ProductResponse fromProductToProductResponse(Product product){
         if(product == null){
             return null;
@@ -64,6 +86,7 @@ public class ObjectMapper {
                 .productName(product.getProductName())
                 .productImage(product.getProductImage())
                 .description(product.getDescription())
+                .howToUse(product.getHowToUse())
                 .productSkinTypeResponses(productSkinTypeResponseList)
                 .productCategoryResponses(productCategoryResponseList)
                 .productCharacteristicsResponses(productCharacteristicsResponseList)

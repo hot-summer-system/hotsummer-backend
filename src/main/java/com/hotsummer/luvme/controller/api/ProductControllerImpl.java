@@ -26,6 +26,15 @@ public class ProductControllerImpl implements ProductController {
     }
 
     @Override
+    public ResponseEntity<ProductResponse> getProductById(String productId) throws CustomBadRequestException, CustomNotFoundException, CustomInternalServerException {
+        if(productId == null){
+            throw new CustomBadRequestException(CustomError.builder().message("Product id is null").errorCode("400").build());
+        }
+        ProductResponse response = productService.getProductWithProductId(productId);
+        return ResponseEntity.ok(response);
+    }
+
+    @Override
     public ResponseEntity<List<ProductResponse>> getProductWithCategory(String categoryCode) throws CustomNotFoundException, CustomInternalServerException, CustomBadRequestException {
         if (categoryCode == null){
             throw new CustomBadRequestException(CustomError.builder().message("Category code is null").errorCode("400").build());

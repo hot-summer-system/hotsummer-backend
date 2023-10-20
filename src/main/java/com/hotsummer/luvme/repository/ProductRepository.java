@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface ProductRepository extends JpaRepository<Product, String> {
 
@@ -15,4 +16,5 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
     @Query("SELECT p FROM Product p JOIN p.productCategories pc JOIN pc.category c WHERE c.categoryCode LIKE %:categoryCode%")
     Optional<List<Product>> findProductsCategoryCode(@Param("categoryCode") String categoryCode);
+    Optional<Product> findProductByProductId(UUID productId);
 }

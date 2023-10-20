@@ -22,8 +22,6 @@ public class RoutingStep {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "routing_step_id")
     private int routingStepId;
-    @Column(name = "description")
-    private String description;
     @Column(name = "product_id")
     private String productId;
 
