@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.hotsummer.luvme.controller.api.exception.CustomForbiddenException;
 import com.hotsummer.luvme.controller.api.exception.CustomNotFoundException;
 import com.hotsummer.luvme.model.request.FavoriteRequest;
+import com.hotsummer.luvme.model.response.FavoriteFullFieldRes;
 import com.hotsummer.luvme.model.response.FavoriteResponse;
 import com.hotsummer.luvme.model.response.ProductResponse;
 
@@ -37,5 +38,5 @@ public interface FavoriteController {
         @Operation(summary = "Get Favorite Product", description = "Get Favorite Product Of a User")
         @PreAuthorize("hasAuthority('CUSTOMER')")
         @GetMapping("/get")
-        public ResponseEntity<List<ProductResponse>> getFavoriteOfCurrentUser();
+        public ResponseEntity<List<FavoriteFullFieldRes>> getFavoriteOfCurrentUser();
 }

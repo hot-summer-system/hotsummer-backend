@@ -10,8 +10,8 @@ import com.hotsummer.luvme.controller.FavoriteController;
 import com.hotsummer.luvme.controller.api.exception.CustomForbiddenException;
 import com.hotsummer.luvme.controller.api.exception.CustomNotFoundException;
 import com.hotsummer.luvme.model.request.FavoriteRequest;
+import com.hotsummer.luvme.model.response.FavoriteFullFieldRes;
 import com.hotsummer.luvme.model.response.FavoriteResponse;
-import com.hotsummer.luvme.model.response.ProductResponse;
 import com.hotsummer.luvme.service.FavoriteService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,8 +39,8 @@ public class FavoriteControllerImpl implements FavoriteController {
     }
 
     @Override
-    public ResponseEntity<List<ProductResponse>> getFavoriteOfCurrentUser() {
-        List<ProductResponse> responses = favoriteService.getAllFavoriteProductOfCurrentUser();
+    public ResponseEntity<List<FavoriteFullFieldRes>> getFavoriteOfCurrentUser() {
+        List<FavoriteFullFieldRes> responses = favoriteService.getAllFavoriteProductOfCurrentUser();
         return ResponseEntity.ok(responses);
     }
 

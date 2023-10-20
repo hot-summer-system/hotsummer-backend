@@ -13,24 +13,35 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "Product Action API")
 public class ProductControllerImpl implements ProductController {
     private final ProductServiceImpl productService;
+
     @Override
-    public ResponseEntity<List<ProductResponse>> getProductWithSuitableSkinType() throws CustomNotFoundException, CustomInternalServerException {
+    public ResponseEntity<List<ProductResponse>> getProductWithSuitableSkinType()
+            throws CustomNotFoundException, CustomInternalServerException {
         List<ProductResponse> response = productService.getProductWithSuitableSkinType();
         return ResponseEntity.ok(response);
     }
 
     @Override
-    public ResponseEntity<List<ProductResponse>> getProductWithCategory(String categoryCode) throws CustomNotFoundException, CustomInternalServerException, CustomBadRequestException {
-        if (categoryCode == null){
-            throw new CustomBadRequestException(CustomError.builder().message("Category code is null").errorCode("400").build());
+    public ResponseEntity<List<ProductResponse>> getProductWithCategory(String categoryCode)
+            throws CustomNotFoundException, CustomInternalServerException, CustomBadRequestException {
+        if (categoryCode == null) {
+            throw new CustomBadRequestException(
+                    CustomError.builder().message("Category code is null").errorCode("400").build());
         }
         List<ProductResponse> response = productService.getProductWithCategory(categoryCode);
         return ResponseEntity.ok(response);
+    }
+
+    @Override
+    public ResponseEntity<ProductResponse> getProductById(UUID id) throws CustomNotFoundException {
+        ProductResponse productResponse = productService.getProductById(id);
+        return ResponseEntity.ok(productResponse);
     }
 }
