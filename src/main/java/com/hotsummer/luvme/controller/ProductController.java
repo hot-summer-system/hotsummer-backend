@@ -26,7 +26,7 @@ public interface ProductController {
                         @ApiResponse(responseCode = "404", description = "No Product Suitable"),
                         @ApiResponse(responseCode = "500", description = "Exception Error"),
         })
-        @GetMapping("/suitableSkinType/")
+        @GetMapping("/suitableSkinType")
         @PreAuthorize("hasAuthority('CUSTOMER')")
         public ResponseEntity<List<ProductResponse>> getProductWithSuitableSkinType()
                         throws CustomNotFoundException, CustomInternalServerException;
@@ -37,7 +37,7 @@ public interface ProductController {
             @ApiResponse(responseCode = "404", description = "No Product Suitable"),
             @ApiResponse(responseCode = "500", description = "Exception Error"),
     })
-    @GetMapping("/category/")
+    @GetMapping("/category")
     @PreAuthorize("hasAuthority('CUSTOMER')")
     public ResponseEntity<List<ProductResponse>> getProductWithCategory(@RequestParam String categoryCode)
             throws CustomNotFoundException, CustomInternalServerException, CustomBadRequestException;

@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class ProductManualResponse {
     private int productManualId;
     private int orderStep;
+    private String nameStep;
     private String description;
 }

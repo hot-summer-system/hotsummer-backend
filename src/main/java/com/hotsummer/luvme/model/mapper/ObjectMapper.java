@@ -81,6 +81,7 @@ public class ObjectMapper {
                 .map(productManual -> new ProductManualResponse(
                         productManual.getProductManualId(),
                         productManual.getOrderStep(),
+                        productManual.getNameStep(),
                         productManual.getDescription()))
                 .collect(Collectors.toList());
 

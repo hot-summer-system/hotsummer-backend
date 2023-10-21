@@ -21,7 +21,7 @@ public interface CategoryController {
             @ApiResponse(responseCode = "200", description = "Get all category successfully"),
             @ApiResponse(responseCode = "404", description = "Not found category"),
     })
-    @GetMapping("/getAll/")
+    @GetMapping("/getAll")
     public ResponseEntity<List<CategoryResponse>> getAllCategory()
             throws CustomNotFoundException;
 }
