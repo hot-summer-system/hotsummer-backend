@@ -30,7 +30,7 @@ public class Product {
     private String productName;
     @Column(name = "product_image")
     private String productImage;
-    @Column(name = "description")
+    @Column(name = "description",  columnDefinition = "nvarchar(max)")
     private String description;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
@@ -43,4 +43,6 @@ public class Product {
     private List<ProductIngredient> productIngredients;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Favorite> favorites;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductManual> productManuals;
 }

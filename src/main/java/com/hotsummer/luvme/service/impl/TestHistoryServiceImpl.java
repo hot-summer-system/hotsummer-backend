@@ -4,7 +4,7 @@ import com.hotsummer.luvme.controller.api.exception.CustomBadRequestException;
 import com.hotsummer.luvme.model.entity.TestHistory;
 import com.hotsummer.luvme.model.entity.UserTbl;
 import com.hotsummer.luvme.model.error.CustomError;
-import com.hotsummer.luvme.model.mapper.SkinTypeConverter;
+import com.hotsummer.luvme.model.mapper.TimeConverter;
 import com.hotsummer.luvme.repository.TestHistoryRepository;
 import com.hotsummer.luvme.repository.UserTblRepository;
 import com.hotsummer.luvme.service.Authentication.AuthenticationService;
@@ -13,8 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Service
@@ -34,11 +32,8 @@ public class TestHistoryServiceImpl implements TestHistoryService {
         UserTbl userTbl = AuthenticationService.getCurrentUserFromSecurityContext();
         userTbl.setIsTest(true);
 
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        Timestamp timestamp = Timestamp.valueOf(currentDateTime);
-
         TestHistory newTest = TestHistory.builder()
-                .date(new Date(timestamp.getTime()))
+                .date(new Date(TimeConverter.getCurrentDate().getTime()))
                 .skinType(skinType)
                 .userAct(userTbl)
                 .build();

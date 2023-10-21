@@ -22,5 +22,6 @@ public class ProductResponse {
     List<ProductCategoryResponse> productCategoryResponses;
     List<ProductCharacteristicsResponse> productCharacteristicsResponses;
     List<ProductIngredientResponse> productIngredientResponses;
+    List<ProductManualResponse> productManualResponses;
 
 }

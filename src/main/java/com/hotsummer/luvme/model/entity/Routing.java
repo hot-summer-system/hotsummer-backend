@@ -1,19 +1,11 @@
 package com.hotsummer.luvme.model.entity;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "Routing")
@@ -32,13 +24,14 @@ public class Routing {
     private Date date;
     @Column(name = "description")
     private String description;
+    @Column(name = "date_reminder")
+    private String dateReminder;
     @Column(name = "is_done")
     private Boolean isDone;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private UserTbl userAct;
-    @ManyToOne
-    @JoinColumn(name = "routing_step_id", referencedColumnName = "routing_step_id")
-    private RoutingStep routingStep;
+    @OneToMany(mappedBy = "routing", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<RoutingProduct> routingProducts;
 }

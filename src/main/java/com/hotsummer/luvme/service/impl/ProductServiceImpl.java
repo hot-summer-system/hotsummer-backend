@@ -1,10 +1,8 @@
 package com.hotsummer.luvme.service.impl;
 
-import com.hotsummer.luvme.controller.api.exception.CustomBadRequestException;
 import com.hotsummer.luvme.controller.api.exception.CustomInternalServerException;
 import com.hotsummer.luvme.controller.api.exception.CustomNotFoundException;
 import com.hotsummer.luvme.model.entity.Product;
-import com.hotsummer.luvme.model.entity.TestHistory;
 import com.hotsummer.luvme.model.error.CustomError;
 import com.hotsummer.luvme.model.mapper.ObjectMapper;
 import com.hotsummer.luvme.model.mapper.SkinTypeConverter;
