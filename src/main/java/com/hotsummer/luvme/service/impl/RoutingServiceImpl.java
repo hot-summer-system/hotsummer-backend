@@ -3,7 +3,6 @@ package com.hotsummer.luvme.service.impl;
 import com.hotsummer.luvme.controller.api.exception.CustomInternalServerException;
 import com.hotsummer.luvme.controller.api.exception.CustomNotFoundException;
 import com.hotsummer.luvme.model.entity.Routing;
-import com.hotsummer.luvme.model.entity.RoutingStep;
 import com.hotsummer.luvme.model.error.CustomError;
 import com.hotsummer.luvme.model.mapper.ObjectMapper;
 import com.hotsummer.luvme.model.mapper.TimeConverter;
@@ -15,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -26,6 +24,19 @@ public class RoutingServiceImpl implements RoutingService {
 
     @Override
     public Routing CreateRouting(String description, String dateReminder) throws CustomInternalServerException {
+        Routing oldRouting = routingRepository.findFirstByUserActUserIdOrderByDateDesc(
+                AuthenticationService.getCurrentUserFromSecurityContext().getUserId());
+
+        if(oldRouting != null){
+            oldRouting.setDescription(description);
+            oldRouting.setDate(TimeConverter.getCurrentDate());
+            oldRouting.setRoutingType(dateReminder.contains("AM") ? "MORNING" : "NIGHT");
+            oldRouting.setDateReminder(TimeConverter.getCronExpression(dateReminder));
+            if(routingRepository.save(oldRouting) == null){
+                throw new CustomInternalServerException(CustomError.builder().errorCode("500").message("Create Failed").field("Create Routing").build());
+            }
+            return oldRouting;
+        }
         Routing routing = Routing.builder()
                 .routing_id(UUID.randomUUID())
                 .routingType(dateReminder.contains("AM") ? "MORNING" : "NIGHT")
@@ -51,7 +62,7 @@ public class RoutingServiceImpl implements RoutingService {
                   .date(TimeConverter.getCurrentDate())
                   .description(routing.getDescription())
                   .dateReminder(routing.getDateReminder())
-                  .routingSteps(routing.getRoutingSteps())
+                  .routingProducts(routing.getRoutingProducts())
                   .userAct(routing.getUserAct())
                   .isDone(false)
                   .build();

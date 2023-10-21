@@ -19,6 +19,6 @@ public class RoutingResponse {
     private String dateReminder;
     private boolean isDone;
 
-    List<RoutingStepResponse> routingStepResponseList;
+    List<RoutingProductResponse> routingProductResponses;
 
 }

@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,8 +12,7 @@ import java.util.UUID;
 @Setter
 @Builder
 @Data
-public class RoutingRequest {
-    private String description;
-    private String dateReminder;
-    List<RoutingProductRequest> routingProductRequests;
+public class RoutingProductRequest {
+    private UUID productId;
+    private int orderProduct;
 }

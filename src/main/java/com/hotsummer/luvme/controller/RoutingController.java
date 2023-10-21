@@ -53,6 +53,6 @@ public interface RoutingController {
     })
     @PostMapping("/create")
     @PreAuthorize("hasAuthority('CUSTOMER')")
-    public ResponseEntity<String> createRouting(RoutingRequest request)
+    public ResponseEntity<String> createRouting(@RequestBody RoutingRequest request)
             throws CustomBadRequestException, CustomInternalServerException, ParseException;
 }

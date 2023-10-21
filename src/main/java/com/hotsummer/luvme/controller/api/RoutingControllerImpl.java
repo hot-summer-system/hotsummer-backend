@@ -5,7 +5,6 @@ import com.hotsummer.luvme.controller.api.exception.CustomBadRequestException;
 import com.hotsummer.luvme.controller.api.exception.CustomInternalServerException;
 import com.hotsummer.luvme.controller.api.exception.CustomNotFoundException;
 import com.hotsummer.luvme.model.entity.Routing;
-import com.hotsummer.luvme.model.entity.RoutingStep;
 import com.hotsummer.luvme.model.error.CustomError;
 import com.hotsummer.luvme.model.request.RoutingRequest;
 import com.hotsummer.luvme.model.response.RoutingResponse;
@@ -17,8 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Value;
 import java.text.ParseException;
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -82,7 +79,7 @@ public class RoutingControllerImpl implements RoutingController {
         }
         Routing routing = routingService.CreateRouting(request.getDescription(), request.getDateReminder());
         if(routing != null){
-            if ( routingStepService.CreateRoutingStep(request.getProductIdList(), routing)){
+            if ( routingStepService.CreateRoutingStep(request.getRoutingProductRequests(), routing)){
                 return ResponseEntity.ok("Success");
             }
         }

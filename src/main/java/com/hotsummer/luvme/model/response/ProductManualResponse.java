@@ -5,13 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoutingStepResponse {
-    private int routingStepId;
-    private String productId;
+public class ProductManualResponse {
+    private int productManualId;
+    private int orderStep;
+    private String description;
 }

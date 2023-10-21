@@ -10,11 +10,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RoutingStep {
+public class RoutingProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "routing_step_id")
-    private int routingStepId;
+    @Column(name = "routing_product_id")
+    private int routingProductId;
+    @Column(name = "order_product")
+    private int orderProduct;
     @Column(name = "product_id")
     private String productId;
 

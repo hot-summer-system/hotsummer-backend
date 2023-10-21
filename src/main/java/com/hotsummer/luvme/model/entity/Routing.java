@@ -33,5 +33,5 @@ public class Routing {
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private UserTbl userAct;
     @OneToMany(mappedBy = "routing", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<RoutingStep> routingSteps;
+    private List<RoutingProduct> routingProducts;
 }
