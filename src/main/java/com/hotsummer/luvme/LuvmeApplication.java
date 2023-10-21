@@ -25,7 +25,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @SecurityScheme(name = "token_auth", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER, scheme = "bearer", bearerFormat = "JWT")
 @OpenAPIDefinition(info = @Info(title = "API Doc for LuvMe Web Service", description = "This is list of endpoints and documentations of REST API for LuvMe Web Service", version = "1.0"), servers = {
-		@Server(url = "http://localhost:8080", description = "Local development server domain") }, security = {
+		@Server(url = "https://hot-summer-service.onrender.com", description = "Local development server domain") }, security = {
 				@SecurityRequirement(name = "token_auth") })
 @EnableScheduling
 public class LuvmeApplication {
