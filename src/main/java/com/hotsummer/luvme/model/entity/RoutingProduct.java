@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "RoutingStep")
+@Table(name = "RoutingProduct")
 @Getter
 @Setter
 @NoArgsConstructor
