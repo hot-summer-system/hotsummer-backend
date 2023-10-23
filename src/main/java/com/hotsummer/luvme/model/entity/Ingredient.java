@@ -19,7 +19,7 @@ public class Ingredient {
     private int ingredientId;
     @Column(name = "name")
     private String name;
-    @Column(name = "description", columnDefinition = "nvarchar(max)")
+    @Column(name = "description")
     private String description;
 
     @OneToMany(mappedBy = "ingredient")

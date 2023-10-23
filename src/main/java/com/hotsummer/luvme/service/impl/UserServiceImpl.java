@@ -3,7 +3,9 @@ package com.hotsummer.luvme.service.impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.TimeZone;
 
 import com.hotsummer.luvme.controller.api.exception.CustomBadRequestException;
 import com.hotsummer.luvme.controller.api.exception.CustomForbiddenException;
@@ -43,7 +45,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserTbl updateUserWithNonFullFill(int userId, UserRequest userRequest) throws CustomBadRequestException, CustomForbiddenException {
         UserTbl userTbl = AuthenticationService.getCurrentUserFromSecurityContext();
-
         if(userId != userTbl.getUserId()){
             throw new CustomForbiddenException(
                     CustomError.builder().
@@ -72,11 +73,11 @@ public class UserServiceImpl implements UserService {
         userTbl.setGender(userRequest.getGender());
         userTbl.setStatus(UserStatus.ACTIVE.toString());
 
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("YYY-MM-DD");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         Date parsedBirthDay;
         try {
-            parsedBirthDay = dateFormat.parse( userRequest.getBirthDay());
+            parsedBirthDay = dateFormat.parse( userRequest.getBirthDay().trim());
         } catch (ParseException e) {
             throw new CustomBadRequestException(
                     CustomError.builder().errorCode("400").message("Invalid date format").field("BirthDay").build());

@@ -17,7 +17,9 @@ public class ProductManual {
     private int productManualId;
     @Column(name = "order_step")
     private int orderStep;
-    @Column(name = "description")
+    @Column(name = "name_step")
+    private String nameStep;
+    @Column(name = "description", columnDefinition = "nvarchar(max)")
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
