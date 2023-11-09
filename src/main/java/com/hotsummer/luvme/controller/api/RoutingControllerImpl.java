@@ -10,7 +10,7 @@ import com.hotsummer.luvme.model.request.RoutingRequest;
 import com.hotsummer.luvme.model.response.RoutingResponse;
 import com.hotsummer.luvme.service.Authentication.AuthenticationService;
 import com.hotsummer.luvme.service.impl.RoutingServiceImpl;
-import com.hotsummer.luvme.service.impl.RoutingStepServiceImpl;
+import com.hotsummer.luvme.service.impl.RoutingProductServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +24,7 @@ public class RoutingControllerImpl implements RoutingController {
     private String envKey;
 
     private final RoutingServiceImpl routingService;
-    private final RoutingStepServiceImpl routingStepService;
+    private final RoutingProductServiceImpl routingStepService;
 
     @Override
     public ResponseEntity<String> CreateRoutingScheduling(String envKey, Integer userId) throws CustomBadRequestException, CustomInternalServerException {
@@ -57,7 +57,7 @@ public class RoutingControllerImpl implements RoutingController {
     }
 
     @Override
-    public ResponseEntity<String> updateRouting(Integer userId) throws CustomBadRequestException, CustomInternalServerException {
+    public ResponseEntity<String> finishedRouting(Integer userId) throws CustomBadRequestException, CustomInternalServerException {
         if(userId == null){
             throw new CustomBadRequestException(CustomError.builder()
                     .errorCode("400").message("User id is null").field("User Id").build());
@@ -66,21 +66,21 @@ public class RoutingControllerImpl implements RoutingController {
             throw new CustomBadRequestException(CustomError.builder()
                     .errorCode("400").message("User id not recognize").field("User Id").build());
         }
-        if (routingService.UpdateRouting(userId)){
-            return ResponseEntity.ok("Success");
+        if (routingService.FinishedRouting(userId)){
+            return ResponseEntity.ok("Routine Finished");
         }
-        return ResponseEntity.ok("Failed");
+        return ResponseEntity.ok("Failed Server Problem");
     }
 
     @Override
-    public ResponseEntity<String> createRouting(RoutingRequest request) throws CustomBadRequestException, CustomInternalServerException, ParseException {
+    public ResponseEntity<String> modifyRoutine(RoutingRequest request) throws CustomBadRequestException, CustomInternalServerException, ParseException {
         if(request == null){
             throw new CustomBadRequestException(CustomError.builder().errorCode("400").message("Request is null").build());
         }
-        Routing routing = routingService.CreateRouting(request.getDescription(), request.getDateReminder());
+        Routing routing = routingService.ModifyRoutine(request.getDescription(), request.getDateReminder());
         if(routing != null){
-            if ( routingStepService.CreateRoutingStep(request.getRoutingProductRequests(), routing)){
-                return ResponseEntity.ok("Success");
+            if ( routingStepService.CreateRoutingProduct(request.getRoutingProductRequests(), routing)){
+                return ResponseEntity.ok("Modify Success");
             }
         }
         return ResponseEntity.ok("Failed");

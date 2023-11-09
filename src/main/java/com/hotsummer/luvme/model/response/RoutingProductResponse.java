@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class RoutingProductResponse {
     private int routingProductId;
     private int orderProduct;
-    private String productId;
+
+    private ProductResponse productResponse;
 }
