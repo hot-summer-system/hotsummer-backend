@@ -32,6 +32,8 @@ public class Product {
     private String productImage;
     @Column(name = "description")
     private String description;
+    @Column(name = "product_affiliate")
+    private String productAffiliate;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductSkinType> productSkinTypes;
