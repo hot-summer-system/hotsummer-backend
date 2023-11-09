@@ -2,11 +2,14 @@ package com.hotsummer.luvme.service.impl;
 
 import com.hotsummer.luvme.controller.api.exception.CustomInternalServerException;
 import com.hotsummer.luvme.controller.api.exception.CustomNotFoundException;
+import com.hotsummer.luvme.model.entity.Product;
 import com.hotsummer.luvme.model.entity.Routing;
+import com.hotsummer.luvme.model.entity.RoutingProduct;
 import com.hotsummer.luvme.model.error.CustomError;
 import com.hotsummer.luvme.model.mapper.ObjectMapper;
 import com.hotsummer.luvme.model.mapper.TimeConverter;
 import com.hotsummer.luvme.model.response.RoutingResponse;
+import com.hotsummer.luvme.repository.ProductRepository;
 import com.hotsummer.luvme.repository.RoutingRepository;
 import com.hotsummer.luvme.service.Authentication.AuthenticationService;
 import com.hotsummer.luvme.service.RoutingService;
@@ -14,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -21,9 +26,9 @@ import java.util.UUID;
 @Transactional
 public class RoutingServiceImpl implements RoutingService {
     private final RoutingRepository routingRepository;
-
+    private final ProductRepository productRepository;
     @Override
-    public Routing CreateRouting(String description, String dateReminder) throws CustomInternalServerException {
+    public Routing ModifyRoutine(String description, String dateReminder) throws CustomInternalServerException {
         Routing oldRouting = routingRepository.findFirstByUserActUserIdOrderByDateDesc(
                 AuthenticationService.getCurrentUserFromSecurityContext().getUserId());
 
@@ -33,7 +38,7 @@ public class RoutingServiceImpl implements RoutingService {
             oldRouting.setRoutingType(dateReminder.contains("AM") ? "MORNING" : "NIGHT");
             oldRouting.setDateReminder(TimeConverter.getCronExpression(dateReminder));
             if(routingRepository.save(oldRouting) == null){
-                throw new CustomInternalServerException(CustomError.builder().errorCode("500").message("Create Failed").field("Create Routing").build());
+                throw new CustomInternalServerException(CustomError.builder().errorCode("500").message("Update Failed").field("Modify Routing").build());
             }
             return oldRouting;
         }
@@ -47,7 +52,7 @@ public class RoutingServiceImpl implements RoutingService {
                 .isDone(false)
                 .build();
         if(routingRepository.save(routing) == null){
-            throw new CustomInternalServerException(CustomError.builder().errorCode("500").message("Create Failed").field("Create Routing").build());
+            throw new CustomInternalServerException(CustomError.builder().errorCode("500").message("Create Failed").field("Modify Routing").build());
         }
         return routing;
     }
@@ -76,14 +81,14 @@ public class RoutingServiceImpl implements RoutingService {
     }
 
     @Override
-    public Boolean UpdateRouting(int userId) throws CustomInternalServerException {
+    public Boolean FinishedRouting(int userId) throws CustomInternalServerException {
         Routing routing = routingRepository.findFirstByUserActUserIdOrderByDateDesc(userId);
         try{
             routing.setIsDone(true);
             routingRepository.save(routing);
         }catch (Exception e){
             throw new CustomInternalServerException(CustomError.builder()
-                    .errorCode("500").message(e.getMessage()).field("Update routing").build());
+                    .errorCode("500").message(e.getMessage()).field("Finished routing").build());
         }
         return true;
     }
@@ -91,10 +96,14 @@ public class RoutingServiceImpl implements RoutingService {
     @Override
     public RoutingResponse GetRouting(int userId) throws CustomNotFoundException {
         Routing routing = routingRepository.findFirstByUserActUserIdOrderByDateDesc(userId);
+        List<Product> products = new ArrayList<>();
         if(routing == null){
             throw new CustomNotFoundException(CustomError.builder().errorCode("404").message("No routing found").build());
         }
-        return ObjectMapper.fromRoutingToRoutingResponse(routing);
+        for (RoutingProduct routingProduct : routing.getRoutingProducts()) {
+            products.add(productRepository.findByProductId(UUID.fromString(routingProduct.getProductId())));
+        }
+        return ObjectMapper.fromRoutingToRoutingResponse(routing, products);
     }
 
 }

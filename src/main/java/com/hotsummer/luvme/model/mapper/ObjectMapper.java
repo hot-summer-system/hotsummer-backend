@@ -9,17 +9,22 @@ import java.util.stream.Collectors;
 
 public class ObjectMapper {
 
-    public static RoutingResponse fromRoutingToRoutingResponse(Routing routing) {
+    public static RoutingResponse fromRoutingToRoutingResponse(Routing routing, List<Product> productList) {
         if (routing == null) {
             return null;
         }
-
         List<RoutingProductResponse> routingProductResponseList = routing.getRoutingProducts().stream()
-                .map(routingProduct -> new RoutingProductResponse(
-                        routingProduct.getRoutingProductId(),
-                        routingProduct.getOrderProduct(),
-                        routingProduct.getProductId()
-                )).collect(Collectors.toList());
+                .map(routingProduct -> {
+                    Product matchedProduct = productList.stream()
+                            .filter(product -> product.getProductId().equals(routingProduct.getProductId()))
+                            .findFirst()
+                            .orElse(null);
+                    return new RoutingProductResponse(
+                            routingProduct.getRoutingProductId(),
+                            routingProduct.getOrderProduct(),
+                            fromProductToProductResponse(matchedProduct)
+                    );
+                }).collect(Collectors.toList());
 
         RoutingResponse.RoutingResponseBuilder builder = RoutingResponse.builder()
                 .routingType(routing.getRoutingType())

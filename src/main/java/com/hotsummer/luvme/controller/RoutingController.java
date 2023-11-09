@@ -36,23 +36,23 @@ public interface RoutingController {
             throws CustomBadRequestException, CustomNotFoundException;
 
 
-    @Operation(summary = "Update routing", description = "Update finished routing")
+    @Operation(summary = "Finished routine", description = "Update status of routine to done when user finished the routine")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Task running Success"),
             @ApiResponse(responseCode = "500", description = "Error Occur"),
     })
-    @PutMapping("/update/{userId}")
-    public ResponseEntity<String> updateRouting(@PathVariable("userId") Integer userId)
+    @PutMapping("/finished/{userId}")
+    public ResponseEntity<String> finishedRouting(@PathVariable("userId") Integer userId)
             throws CustomBadRequestException, CustomInternalServerException;
 
-    @Operation(summary = "Create Routing", description = "Create Routing And Routing Step")
+    @Operation(summary = "Modify Routing", description = "Create or Update Routing And Routing Step")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Create Success"),
+            @ApiResponse(responseCode = "200", description = "Modify Success"),
             @ApiResponse(responseCode = "400", description = "Some Fill Input Incorrect"),
             @ApiResponse(responseCode = "500", description = "Error Occur"),
     })
-    @PostMapping("/create")
+    @PostMapping("/modify")
     @PreAuthorize("hasAuthority('CUSTOMER')")
-    public ResponseEntity<String> createRouting(@RequestBody RoutingRequest request)
+    public ResponseEntity<String> modifyRoutine(@RequestBody RoutingRequest request)
             throws CustomBadRequestException, CustomInternalServerException, ParseException;
 }

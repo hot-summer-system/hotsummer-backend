@@ -6,8 +6,8 @@ import com.hotsummer.luvme.model.entity.Routing;
 import com.hotsummer.luvme.model.response.RoutingResponse;
 
 public interface RoutingService {
-    Routing CreateRouting (String description, String dateReminder) throws CustomInternalServerException;
+    Routing ModifyRoutine(String description, String dateReminder) throws CustomInternalServerException;
     Boolean CreateRoutingScheduling(int userId) throws CustomInternalServerException;
-    Boolean UpdateRouting(int userId) throws CustomInternalServerException;
+    Boolean FinishedRouting(int userId) throws CustomInternalServerException;
     RoutingResponse GetRouting(int userId) throws CustomNotFoundException;
 }
