@@ -17,6 +17,7 @@ public class ProductResponse {
     private String productName;
     private String productImage;
     private String description;
+    private String productAffiliate;
 
     List<ProductSkinTypeResponse> productSkinTypeResponses;
     List<ProductCategoryResponse> productCategoryResponses;

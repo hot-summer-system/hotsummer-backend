@@ -95,6 +95,7 @@ public class ObjectMapper {
                 .productName(product.getProductName())
                 .productImage(product.getProductImage())
                 .description(product.getDescription())
+                .productAffiliate(product.getProductAffiliate())
                 .productSkinTypeResponses(productSkinTypeResponseList)
                 .productCategoryResponses(productCategoryResponseList)
                 .productCharacteristicsResponses(productCharacteristicsResponseList)
