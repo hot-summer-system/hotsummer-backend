@@ -5,6 +5,7 @@ import com.hotsummer.luvme.model.response.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class ObjectMapper {
@@ -16,7 +17,7 @@ public class ObjectMapper {
         List<RoutingProductResponse> routingProductResponseList = routing.getRoutingProducts().stream()
                 .map(routingProduct -> {
                     Product matchedProduct = productList.stream()
-                            .filter(product -> product.getProductId().equals(routingProduct.getProductId()))
+                            .filter(product -> product.getProductId().equals(UUID.fromString(routingProduct.getProductId())))
                             .findFirst()
                             .orElse(null);
                     return new RoutingProductResponse(
