@@ -14,7 +14,7 @@ spring:
 ---
 spring:
   config:
-    import: env.yml
+    import: env-cloud.yml
   jpa:
     properties:
       hibernate:
