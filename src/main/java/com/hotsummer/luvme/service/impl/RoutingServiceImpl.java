@@ -10,6 +10,7 @@ import com.hotsummer.luvme.model.mapper.ObjectMapper;
 import com.hotsummer.luvme.model.mapper.TimeConverter;
 import com.hotsummer.luvme.model.response.RoutingResponse;
 import com.hotsummer.luvme.repository.ProductRepository;
+import com.hotsummer.luvme.repository.RoutingProductRepository;
 import com.hotsummer.luvme.repository.RoutingRepository;
 import com.hotsummer.luvme.service.Authentication.AuthenticationService;
 import com.hotsummer.luvme.service.RoutingService;
@@ -27,12 +28,16 @@ import java.util.UUID;
 public class RoutingServiceImpl implements RoutingService {
     private final RoutingRepository routingRepository;
     private final ProductRepository productRepository;
+    private final RoutingProductRepository routingProductRepository;
     @Override
     public Routing ModifyRoutine(String description, String dateReminder) throws CustomInternalServerException {
         Routing oldRouting = routingRepository.findFirstByUserActUserIdOrderByDateDesc(
                 AuthenticationService.getCurrentUserFromSecurityContext().getUserId());
 
         if(oldRouting != null){
+            for (RoutingProduct routingProduct : oldRouting.getRoutingProducts()) {
+                routingProduct.setRouting(null);
+            }
             oldRouting.setDescription(description);
             oldRouting.setDate(TimeConverter.getCurrentDate());
             oldRouting.setRoutingType(dateReminder.contains("AM") ? "MORNING" : "NIGHT");
