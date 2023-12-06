@@ -12,4 +12,5 @@ public class AuthenticateResponse {
     private String status;
     private Boolean isTest;
     private String email;
+    private Boolean isPremium;
 }
