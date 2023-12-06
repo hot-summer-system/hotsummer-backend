@@ -34,6 +34,8 @@ public class AuthenticationService {
                 user.getUserId(),
                 user.getStatus(),
                 user.getIsTest(),
-                user.getEmail());
+                user.getEmail(),
+                user.getIsPremium());
+
     }
 }
